@@ -24,8 +24,10 @@ class ReplaceCleanCacheMessage
     {
         $cacheTypes = implode(', ', $this->getCacheTypesForRefresh());
         $message = __('One or more of the Cache Types are invalidated: %1. ', $cacheTypes) . ' ';
-        $url = $this->urlBuilder->getUrl('adminhtml/cache/smartClean');
-        $message .= __('Please <a id="smart-cache-clean" href="%1">Click Here</a> to refresh cache types immediately.', $url);
+        $urlClean = $this->urlBuilder->getUrl('adminhtml/cache/smartClean');
+        $urlIndex = $this->urlBuilder->getUrl('adminhtml/cache');
+        $message .= __('. Please <a id="smart-cache-clean" href="%1">Click Here</a> to refresh cache types immediately or ', $urlClean);
+        $message .= __('Please go to <a href="%1">Cache Management</a> and refresh cache types.', $urlIndex);
 
         return $message;
     }
