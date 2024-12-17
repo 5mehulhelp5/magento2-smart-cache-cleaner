@@ -1,0 +1,8 @@
+"One or more of the Cache Types are invalidated: %1. ","One or more of the Cache Types are invalidated: %1. "
+"Please <a id="smart-cache-clean" href="%1">Click Here</a> to refresh cache types immediately or ","Please <a id="smart-cache-clean" href="%1">Click Here</a> to refresh cache types immediately or "
+"Please go to <a href="%1">Cache Management</a> and refresh cache types.","go to <a href="%1">Cache Management</a> and refresh cache types."
+"After refreshing the cache, the next page load will be slow.","After refreshing the cache, the next page load will be slow."
+"Are you sure?","Are you sure?"
+"An error occurred while refreshing cache.","An error occurred while refreshing cache."
+"Nothing to flush as no cache is in an invalid state.","Nothing to flush as no cache is in an invalid state."
+"%1 cache type(s) refreshed.","%1 cache type(s) refreshed."
