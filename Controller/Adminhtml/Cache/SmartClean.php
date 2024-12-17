@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Hryvinskyi\SmartCacheCleaner\Controller\Cache;
+namespace Hryvinskyi\SmartCacheCleaner\Controller\Adminhtml\Cache;
 
 use Magento\Backend\Controller\Adminhtml\Cache;
 use Magento\Framework\App\ResponseInterface;
@@ -28,20 +28,24 @@ class SmartClean extends Cache
             $cacheTypes = $this->getInvalidatedCacheTypes();
 
             if (empty($cacheTypes)) {
-                $response['message'] = __('Nothing to flush as no cache is in an invalid state.');
-                $this->addFlashMessage((string)$response['message'], 'notice');
+                $message = __('Nothing to flush as no cache is in an invalid state.');
+                $response['message'] = $message;
+                $this->addFlashMessage((string)$message, 'notice');
             } else {
                 $this->refreshCacheTypes($cacheTypes);
+                $message = __('%1 cache type(s) refreshed.', implode(', ', $cacheTypes));
                 $response['error'] = false;
-                $response['message'] = __('%1 cache type(s) refreshed.', implode(', ', $cacheTypes));
-                $this->addFlashMessage((string)$response['message']);
+                $response['message'] = $message;
+                $this->addFlashMessage((string)$message);
             }
         } catch (LocalizedException $e) {
-            $response['message'] = $e->getMessage();
-            $this->addFlashMessage($response['message'], 'error');
+            $message = $e->getMessage();
+            $response['message'] = $message;
+            $this->addFlashMessage($message, 'error');
         } catch (\Exception|\Throwable $e) {
-            $response['message'] = __('An error occurred while refreshing cache.');
-            $this->messageManager->addExceptionMessage($e, $response['message']);
+            $message = __('An error occurred while refreshing cache.');
+            $response['message'] = $message;
+            $this->messageManager->addExceptionMessage($e, $message);
         }
 
         return $this->processResponse($response);
@@ -87,7 +91,7 @@ class SmartClean extends Cache
      */
     private function addFlashMessage(string $message, string $type = 'success'): void
     {
-        if (!$this->getRequest()->isAjax()) {
+        if ($this->getRequest()->isAjax() === false) {
             switch ($type) {
                 case 'error':
                     $this->messageManager->addErrorMessage($message);
